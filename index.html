@@ -252,7 +252,7 @@
         /* Chicken Grid - Mobile Optimized */
         .chicken-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             max-height: 55vh;
             overflow-y: auto;
@@ -803,26 +803,30 @@
             position: fixed;
             bottom: 100px;
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
+            transform: translateX(-50%) translateY(150%);
             background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
             color: white;
-            padding: 16px 28px;
-            border-radius: 16px;
-            font-size: 1rem;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 0.95rem;
             font-weight: 500;
             z-index: 3000;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
-            min-width: 280px;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+            min-width: 260px;
             text-align: center;
             border: 2px solid rgba(255,255,255,0.2);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .toast.show {
             transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .toast-icon {
@@ -1841,9 +1845,10 @@
             toast.classList.add('show');
             lucide.createIcons();
             
-            setTimeout(() => {
+            if (toast.hideTimeout) clearTimeout(toast.hideTimeout);
+            toast.hideTimeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 2000);
         }
 
         // Install Banner
